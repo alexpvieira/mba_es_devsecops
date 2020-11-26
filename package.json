@@ -4,7 +4,7 @@
 	"description": "",
 	"main": "./dist/server.js",
 	"scripts": {
-		"test": "nodemon --watch . --ext ts --exec \"mocha --exit -r ts-node/register test/**/*.spec.ts\"",
+		"test": "mocha --exit -r ts-node/register test/**/*.spec.ts",
 		"dev": "tsc && nodemon ./dist/server.js",
 		"prod": "tsc && nodemon ./dist/server.js",
 		"build": "tsc"
