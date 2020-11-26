@@ -33,7 +33,7 @@ describe('Testing users routes', () => {
             "first_name": "Alex 2",
             "middle_name": "Pereira 2",
             "last_name": "Vieira 2",
-            "email": "alex.vieira@mail.com"
+            "email": "alex.vieiram"
         }
 
         const res = await request(app).put(`/api/user/${id_user}`).send(post_data)
