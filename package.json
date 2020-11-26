@@ -7,7 +7,8 @@
 		"test": "mocha --exit -r ts-node/register test/**/*.spec.ts",
 		"dev": "tsc && nodemon ./dist/server.js",
 		"start": "tsc && nodemon ./dist/server.js",
-		"build": "tsc"
+		"build": "tsc",
+		"tsc": "tsc"
 	},
 	"keywords": [],
 	"author": "",
