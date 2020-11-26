@@ -9,9 +9,10 @@
        "noImplicitAny": false
     },
     "include": [
-       "lib/**/*.ts"
+       "lib/**/*.ts", "test/userController.test.ts"
     ],
     "exclude": [
-       "node_modules"
+       "node_modules",
+       "test/**/*.ts"
     ]
  }

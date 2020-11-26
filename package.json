@@ -4,14 +4,20 @@
 	"description": "",
 	"main": "./dist/server.js",
 	"scripts": {
-		"test": "ts-node ./lib/server.ts",
+		"test": "nodemon --watch . --ext ts --exec \"mocha -r ts-node/register test/**/*.spec.ts\"",
 		"dev": "tsc && nodemon ./dist/server.js",
-		"prod": "tsc && nodemon ./dist/server.js"
+		"prod": "tsc && nodemon ./dist/server.js",
+		"build": "tsc"
 	},
 	"keywords": [],
 	"author": "",
 	"license": "ISC",
 	"devDependencies": {
+		"@types/chai": "^4.2.14",
+		"@types/mocha": "^8.0.4",
+		"chai": "^4.2.0",
+		"mocha": "^8.2.1",
+		"supertest": "^6.0.1",
 		"ts-node": "^9.0.0",
 		"typescript": "^4.1.2"
 	},
