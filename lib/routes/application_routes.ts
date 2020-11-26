@@ -33,7 +33,7 @@ export class ApplicationRoutes {
             this.user_controller.get_user(req, res)
         })
 
-        app.put('/api/user/:id', (req: Request, res: Response) => {
+        app.put('/api/user/:id', validator.body(querySchema), (req: ValidatedRequest<HelloRequestSchema>, res) => {
             this.user_controller.update_user(req, res)
         })
 
