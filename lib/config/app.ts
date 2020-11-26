@@ -7,7 +7,7 @@ import { CommonRoutes } from '../routes/common_routes'
 
 class App {
    public app: express.Application
-   public mongoUrl: string = 'mongodb://localhost/' + environment.getDBName()
+   public mongoUrl: string = `mongodb+srv://db_user:dark1610@cluster0.d2k4q.mongodb.net/${environment.getDBName()}?retryWrites=true&w=majority`
 
    private application_routes: ApplicationRoutes = new ApplicationRoutes()
    private common_routes: CommonRoutes = new CommonRoutes()

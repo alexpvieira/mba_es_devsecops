@@ -4,18 +4,10 @@ import { ModificationNote } from '../common/model'
 const Schema = mongoose.Schema
 
 const schema = new Schema({
-    name: {
-        type: {
-            first_name: String,
-            middle_name: String,
-            last_name: String
-        }
-    },
+    first_name: String,
+    middle_name: String,
+    last_name: String,
     email: String,
-    is_deleted: {
-        type: Boolean,
-        default: false
-    },
     modification_notes: [ModificationNote]
 })
 

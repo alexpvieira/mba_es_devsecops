@@ -7,33 +7,26 @@ export class UserController {
     private user_service: UserService = new UserService()
 
     public create_user(req: Request, res: Response) {
-        if (req.body.name && req.body.name.first_name && req.body.name.middle_name && req.body.name.last_name && req.body.email) {
-            const user_params: IUser = {
-                name: {
-                    first_name: req.body.name.first_name,
-                    middle_name: req.body.name.middle_name,
-                    last_name: req.body.name.last_name
-                },
-                email: req.body.email,
-                modification_notes: [{
-                    modified_on: new Date(Date.now()),
-                    modified_by: null,
-                    modification_note: 'New user created'
-                }]
-            }
-
-            this.user_service.createUser(user_params, (err: any, user_data: IUser) => {
-                if (err) {
-                    mongoError(err, res)
-                } 
-                else {
-                    successResponse('create user successfull', user_data, res)
-                }
-            })
-        } 
-        else {
-            insufficientParameters(res)
+        const user_params: IUser = {
+            first_name: req.body.first_name,
+            middle_name: req.body.middle_name,
+            last_name: req.body.last_name,
+            email: req.body.email,
+            modification_notes: [{
+                modified_on: new Date(Date.now()),
+                modified_by: null,
+                modification_note: 'New user created'
+            }]
         }
+
+        this.user_service.createUser(user_params, (err: any, user_data: IUser) => {
+            if (err) {
+                mongoError(err, res)
+            } 
+            else {
+                successResponse('create user successfull', user_data, res)
+            }
+        })
     }
 
     public get_user(req: Request, res: Response) {
@@ -54,47 +47,39 @@ export class UserController {
     }
 
     public update_user(req: Request, res: Response) {
-        if (req.params.id && req.body.name || req.body.name.first_name || req.body.name.middle_name || req.body.name.last_name || req.body.email) {
-            const user_filter = { _id: req.params.id }
-            
-            this.user_service.filterUser(user_filter, (err: any, user_data: IUser) => {
-                if (err) {
-                    mongoError(err, res);
-                } 
-                else if (user_data) {
-                    user_data.modification_notes.push({
-                        modified_on: new Date(Date.now()),
-                        modified_by: null,
-                        modification_note: 'User data updated'
-                    })
-                    const user_params: IUser = {
-                        _id: req.params.id,
-                        name: req.body.name ? {
-                            first_name: req.body.name.first_name ? req.body.name.first_name : user_data.name.first_name,
-                            middle_name: req.body.name.middle_name ? req.body.name.middle_name : user_data.name.middle_name,
-                            last_name: req.body.name.last_name ? req.body.name.last_name : user_data.name.last_name
-                        } : user_data.name,
-                        email: req.body.email ? req.body.email : user_data.email,
-                        is_deleted: req.body.is_deleted ? req.body.is_deleted : user_data.is_deleted,
-                        modification_notes: user_data.modification_notes
-                    }
-                    this.user_service.updateUser(user_params, (err: any) => {
-                        if (err) {
-                            mongoError(err, res)
-                        } 
-                        else {
-                            successResponse('update user successfull', null, res);
-                        }
-                    })
-                } 
-                else {
-                    failureResponse('invalid user', null, res);
+        const user_filter = { _id: req.params.id }
+        
+        this.user_service.filterUser(user_filter, (err: any, user_data: IUser) => {
+            if (err) {
+                mongoError(err, res);
+            } 
+            else if (user_data) {
+                user_data.modification_notes.push({
+                    modified_on: new Date(Date.now()),
+                    modified_by: null,
+                    modification_note: 'User data updated'
+                })
+                const user_params: IUser = {
+                    _id: req.params.id,
+                    first_name: req.body.first_name,
+                    middle_name: req.body.middle_name,
+                    last_name: req.body.last_name,
+                    email: req.body.email,
+                    modification_notes: user_data.modification_notes
                 }
-            })
-        } 
-        else {
-            insufficientParameters(res);
-        }
+                this.user_service.updateUser(user_params, (err: any) => {
+                    if (err) {
+                        mongoError(err, res)
+                    } 
+                    else {
+                        successResponse('update user successfull', null, res)
+                    }
+                })
+            } 
+            else {
+                failureResponse('invalid user', null, res)
+            }
+        })
     }
 
     public delete_user(req: Request, res: Response) {

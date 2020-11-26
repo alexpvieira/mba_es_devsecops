@@ -34,6 +34,14 @@ class Environment {
             return 'db_local'
         }
     }
+
+    getDBUsername(): String {
+        return 'db_user'
+    }
+
+    getDBPassword(): String {
+        return 'dark1610'
+    }
 }
 
 export default new Environment(Environments.local)
