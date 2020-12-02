@@ -1,18 +1,18 @@
 {
-    "compilerOptions": {
-       "module": "commonjs",
-       "moduleResolution": "node",
-       "pretty": true,
-       "target": "es6",
-       "outDir": "./dist",
-       "baseUrl": "./lib",
-       "noImplicitAny": false
-    },
-    "include": [
-       "lib/**/*.ts", "test/userController.test.ts"
-    ],
-    "exclude": [
-       "node_modules",
-       "test/**/*.ts"
-    ]
- }
+	"compilerOptions": {
+		"module": "commonjs",
+		"moduleResolution": "node",
+		"pretty": true,
+		"target": "es6",
+		"outDir": "./dist",
+		"baseUrl": "./lib",
+		"noImplicitAny": false
+	},
+	"include": [
+		"lib/**/*.ts", "test/userController.test.ts"
+	],
+	"exclude": [
+		"node_modules",
+		"test/**/*.ts"
+	]
+}
