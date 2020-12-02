@@ -5,5 +5,9 @@ export class CommonRoutes {
         app.all('*', function (req: Request, res: Response) {
             res.status(404).send({ error: true, message: 'Check your URL please' })
         })
+
+        app.get('/debug-sentry', (req: Request, res: Response) => {
+            throw new Error("My first Sentry error!")
+        })
     }
 }

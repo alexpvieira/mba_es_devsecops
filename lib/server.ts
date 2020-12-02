@@ -1,8 +1,8 @@
 import app from './config/app'
 import env from './environment'
 import { RewriteFrames } from '@sentry/integrations'
-import * as Sentry from "@sentry/node"
-import * as Tracing from "@sentry/tracing"
+import * as Sentry from '@sentry/node'
+import * as Tracing from '@sentry/tracing'
 
 declare global {
     namespace NodeJS {
@@ -19,14 +19,22 @@ Sentry.init({
     integrations: [
         new RewriteFrames({
             root: global.__rootdir__
+        }),
+        new Sentry.Integrations.Http({ tracing: true }),
+        new Tracing.Integrations.Express({ 
+            app
         })
     ],
     tracesSampleRate: 1.0
 })
 
-const transaction = Sentry.startTransaction({
-    op: "test",
-    name: "My First Test Transaction",
+app.use(Sentry.Handlers.requestHandler())
+app.use(Sentry.Handlers.tracingHandler())
+app.use(Sentry.Handlers.errorHandler())
+
+app.use(function onError(err, req, res, next) {
+    res.statusCode = 500;
+    res.end(res.sentry + "\n")
 })
 
 const PORT = process.env.PORT || 3000
