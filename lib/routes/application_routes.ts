@@ -6,7 +6,7 @@ import { ContainerTypes, ValidatedRequest, ValidatedRequestSchema, createValidat
 const validator = createValidator()
 
 const querySchema = Joi.object({
-    first_name: Joi.string().required(),
+    first_name: Joi.string().email().required(),
     middle_name: Joi.string().required(),
     last_name: Joi.string().required(),
     email: Joi.string().email().required()
